@@ -1,3 +1,7 @@
+## Mecanical Rotary Encoder Library
+
+A lightweight library for handling **mechanical rotary encoders** (e.g., KY-040). It tracks encoder states to **avoid false inputs** and provides accurate rotation detection with **debouncing** and **direction tracking**. Supports easy integration for projects requiring precise encoder input.
+
 Library for handling **mechanical rotary encoders** (e.g., KY-040). It tracks encoder states to **avoid false inputs** and provides accurate rotation detection.
 
 ## Example code to use this library
