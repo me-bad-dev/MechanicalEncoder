@@ -1,0 +1,1 @@
+# MechanicalEncoder Library
