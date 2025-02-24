@@ -1,3 +1,5 @@
+Library for handling **mechanical rotary encoders** (e.g., KY-040). It tracks encoder states to **avoid false inputs** and provides accurate rotation detection.
+
 ## Example code to use this library
 
 ```cpp
