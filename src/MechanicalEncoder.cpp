@@ -1,6 +1,8 @@
 #include "MechanicalEncoder.h"
 #include <Arduino.h>
 
+static MechanicalEncoder* encoderInstance = nullptr;
+
 MechanicalEncoder::MechanicalEncoder(uint8_t _dt, uint8_t _clk, int _min, int _max, int _actual, bool _loop) {   
    
     pinDT = _dt;
@@ -13,16 +15,28 @@ MechanicalEncoder::MechanicalEncoder(uint8_t _dt, uint8_t _clk, int _min, int _m
     max = _max;
     loop = _loop;
     
-    pinMode(pinDT, INPUT_PULLUP);
-    pinMode(pinCLK, INPUT_PULLUP);
+    pinMode(pinDT, INPUT);
+    pinMode(pinCLK, INPUT);
+    //pinMode(pinDT, INPUT_PULLUP);
+    //pinMode(pinCLK, INPUT_PULLUP);
+}
+
+void MechanicalEncoder::AttachInterrupts()
+{
+    attachInterrupt(pinDT, HandleInterrupt, CHANGE);
+    attachInterrupt(pinCLK, HandleInterrupt, CHANGE);
+
+    encoderInstance = this;
+} 
+
+void IRAM_ATTR MechanicalEncoder::HandleInterrupt() {
+    if (encoderInstance) encoderInstance->Process();
 }
 
 void IRAM_ATTR MechanicalEncoder::Process() {
     
   unsigned char pinstate = (digitalRead(pinCLK) << 1) | digitalRead(pinDT);
-
   state = stateTable[state & 0xf][pinstate];
-
   unsigned char result = state & 48;
 
   // CW rotation

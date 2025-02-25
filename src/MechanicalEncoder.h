@@ -27,9 +27,11 @@ class MechanicalEncoder {
 		int min;
 		int max;
 		bool loop;
+		static void IRAM_ATTR HandleInterrupt();
 	public:
 		MechanicalEncoder(uint8_t _dt, uint8_t _clk, int _min, int _max, int _actual, bool _loop);
-		void Process();
+		void AttachInterrupts();
+		void IRAM_ATTR Process();
 		bool Updated();
 		bool ProcessAndCheck();
 		int Value();
