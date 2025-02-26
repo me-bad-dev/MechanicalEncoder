@@ -3,28 +3,28 @@
 
 static MechanicalEncoder* encoderInstance = nullptr;
 
-MechanicalEncoder::MechanicalEncoder(uint8_t _dt, uint8_t _clk, int _min, int _max, int _actual, bool _loop) {   
-   
-    pinDT = _dt;
-    pinCLK = _clk;
+MechanicalEncoder::MechanicalEncoder(uint8_t _clk, uint8_t _dt, int _min, int _max, int _actual, bool _loop) {     
 
+    pinCLK = _clk;
+    pinDT = _dt;
+ 
     state = 0;
     value_reported = value = _actual;
 
     min = _min;
     max = _max;
     loop = _loop;
-    
-    pinMode(pinDT, INPUT);
+	
     pinMode(pinCLK, INPUT);
+    pinMode(pinDT, INPUT);
     //pinMode(pinDT, INPUT_PULLUP);
     //pinMode(pinCLK, INPUT_PULLUP);
 }
 
 void MechanicalEncoder::AttachInterrupts()
 {
-    attachInterrupt(pinDT, HandleInterrupt, CHANGE);
     attachInterrupt(pinCLK, HandleInterrupt, CHANGE);
+    attachInterrupt(pinDT, HandleInterrupt, CHANGE);
 
     encoderInstance = this;
 } 
