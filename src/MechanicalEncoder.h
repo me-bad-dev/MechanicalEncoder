@@ -16,11 +16,11 @@ class MechanicalEncoder {
             {6, 5, 4, 0},
         };
 
-		uint8_t pinDT;  
 		uint8_t pinCLK;  
+		uint8_t pinDT;  
 
-        int state;
-        int value;
+		int state;
+		int value;
 
 		int value_reported;
 
@@ -29,7 +29,7 @@ class MechanicalEncoder {
 		bool loop;
 		static void IRAM_ATTR HandleInterrupt();
 	public:
-		MechanicalEncoder(uint8_t _dt, uint8_t _clk, int _min, int _max, int _actual, bool _loop);
+		MechanicalEncoder(uint8_t _clk, uint8_t _dt, int _min, int _max, int _actual, bool _loop);
 		void AttachInterrupts();
 		void IRAM_ATTR Process();
 		bool Updated();
