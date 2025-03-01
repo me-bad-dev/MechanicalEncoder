@@ -35,6 +35,7 @@ class MechanicalEncoder {
 		bool Updated();
 		bool ProcessAndCheck();
 		int Value();
+		void SetValue(int _value);
 };
 
 #endif
