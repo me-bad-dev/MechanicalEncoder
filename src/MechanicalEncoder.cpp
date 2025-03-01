@@ -67,6 +67,10 @@ int MechanicalEncoder::Value() {
 	return value;
 };
 
+void MechanicalEncoder::SetValue(int _value){
+	value = _value;
+}
+
 bool MechanicalEncoder::ProcessAndCheck() {
     Process();
     return Updated();
